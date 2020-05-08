@@ -1,40 +1,26 @@
-import React, { useState, useEffect } from 'react';
-//import './App.css';
+import React, { useState, useEffect, useContext } from 'react';
 
 // components
 import Header from './Components/Header';
-import Footer from './Components/Footer';
 import BlogContainer from './Components/Blog/BlogContainer';
 
-// api calls
-import api from './Data/api';
+// data
+import BlogPostCache from './Data/postCache';
+import { observer } from 'mobx-react-lite';
 
 const App = () => {
-  const [blogPosts, setPosts] = useState([]);
-
+  const postCache = useContext(BlogPostCache)
 
   useEffect(() => {
-    api.BlogPosts.list()
-      .then( response => {
-        let posts = [];
-
-        response.forEach((post) => {
-          post.createdDateTime = post.createdDateTime.split('.')[0];
-          posts.push(post);
-        })
-
-        setPosts(posts);
-      })
-  }, []);
-
-  console.log(blogPosts);
+    postCache.loadBlogPosts();
+  }, [postCache]);
 
   return (
     <React.Fragment>
       <Header/>
-      <BlogContainer blogPosts={blogPosts}/>
+      <BlogContainer/>
     </React.Fragment>
   );
 }
 
-export default App;
+export default observer(App);

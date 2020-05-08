@@ -21,12 +21,23 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
-
   },
   title: {
     flexGrow: 1,
   }
 }));
+
+
+const ToGitHub = () => {
+  var win = window.open('https://github.com/jeqb/');
+  win.focus();
+};
+
+
+const ToLinkedIn = () => {
+  var win = window.open('https://www.linkedin.com/in/james-bonner-367012b1');
+  win.focus();
+};
 
 
 const Header = () => {
@@ -53,12 +64,12 @@ const Header = () => {
           </Tooltip>
           <Tooltip title="GitHub">
             <IconButton className={classes.icon} color="inherit" aria-label="menu">
-              <GitHubIcon />
+              <GitHubIcon onClick={ToGitHub}/>
             </IconButton>
           </Tooltip>
           <Tooltip title="LinkedIn">
             <IconButton className={classes.icon} color="inherit" aria-label="menu">
-              <LinkedInIcon />
+              <LinkedInIcon onClick={ToLinkedIn}/>
             </IconButton>
           </Tooltip>
         </Toolbar>
