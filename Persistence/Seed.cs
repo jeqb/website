@@ -23,7 +23,7 @@ namespace Persistence
                     },
                     new BlogPost
                     { 
-                        Title = "My fake title 2",
+                        Title = "My fake title 2 From Seed",
                         Body = "This is my fake body for title 2",
                         ImageKey = null,
                         CreatedDateTime = DateTime.Now,
@@ -31,8 +31,64 @@ namespace Persistence
                     },
                     new BlogPost
                     { 
-                        Title = "My fake title 3",
+                        Title = "My fake title 3 From Seed",
                         Body = "This is my fake body for title 3",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 4 From Seed",
+                        Body = "This is my fake body for title 4",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 5 From Seed",
+                        Body = "This is my fake body for title 5",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 6 From Seed",
+                        Body = "This is my fake body for title 6",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 7 From Seed",
+                        Body = "This is my fake body for title 7",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 8 From Seed",
+                        Body = "This is my fake body for title 8",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 9 From Seed",
+                        Body = "This is my fake body for title 9",
+                        ImageKey = null,
+                        CreatedDateTime = DateTime.Now,
+                        UpdatedDateTime = null,
+                    },
+                    new BlogPost
+                    { 
+                        Title = "My fake title 10 From Seed",
+                        Body = "This is my fake body for title 10",
                         ImageKey = null,
                         CreatedDateTime = DateTime.Now,
                         UpdatedDateTime = null,
