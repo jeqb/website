@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -12,7 +13,9 @@ namespace Application.BlogPosts
         public class Command : IRequest
         {
             public int Id { get; set; }
+            [Required]
             public string Title { get; set; }
+            [Required]
             public string Body { get; set; }
             public int? ImageKey { get; set; }
             public DateTime CreatedDateTime { get; set; }
@@ -30,7 +33,6 @@ namespace Application.BlogPosts
             {
                 var post = new BlogPost
                 {
-                    // Id = request.Id,
                     Title = request.Title,
                     Body = request.Body,
                     ImageKey = request.ImageKey,

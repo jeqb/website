@@ -1,6 +1,9 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using MediatR;
 using Persistence;
 
@@ -25,7 +28,8 @@ namespace Application.BlogPosts
             {
                 var post = await _context.BlogPost.FindAsync(request.Id);
 
-                if (post == null) throw new Exception("Could not find Blog post ");
+                if (post == null)
+                    throw new RestException(HttpStatusCode.NotFound, new{BlogPost = "Not Found" });
 
                 _context.Remove(post);
 
