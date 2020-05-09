@@ -8,61 +8,57 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    alignContent: 'center'
   },
   form: {
-    alignItems: 'center'
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center'
   },
   field: {
     textAlign: 'center',
     padding: '1%'
   },
-  Button: {
-    alignContent: 'center'
+  buttonBox: {
+    display: 'flex',
+    direction: 'column',
+    justifyContent: 'center'
   }
 }));
 
 
-const Contact = () => {
+const Login = () => {
   const classes = useStyles();
 
   return (
     <Container className={classes.root}>
       <Typography align="center">
         <h1>
-          Contact
+          Login
         </h1>      
       </Typography>
       <form className={classes.form}>
-          <TextField
-            className={classes.field}
-            id="Name"
-            label="Name"
-            variant="outlined"
-          />
-          <TextField
-            className={classes.field}
-            id="Email"
-            label="Email"
-            variant="outlined"
-          />
         <div className={classes.field}>
           <TextField
-            id="Message"
-            label="Message here"
-            type="Text Area"
+            id="Username"
+            label="Username"
             variant="outlined"
-            multiline
-            rows={10}
-            fullWidth={true}
           />
         </div>
-        <Button variant="contained" size="large" color="primary">
-          Submit
-        </Button>
+        <div className={classes.field}>
+          <TextField
+            id="Password"
+            label="Password"
+            variant="outlined"
+          />
+        </div>
+        <div className={classes.buttonBox}>
+          <Button variant="contained" size="large" color="primary">
+            Login
+          </Button>
+        </div>
       </form>
     </Container>
   );
 };
 
-export default Contact;
+export default Login

@@ -12,6 +12,7 @@ import Contact from './Components/Contact/Contact'
 // data
 import BlogPostCache from './Data/postCache';
 import { observer } from 'mobx-react-lite';
+import Login from './Components/Admin/Login';
 
 const App = () => {
   const postCache = useContext(BlogPostCache)
@@ -25,8 +26,9 @@ const App = () => {
       <Header />
       <Container>
         <Route exact path='/' component={Home}/>
-        <Route exact path='/about' component={About}/>
-        <Route exact path='/contact' component={Contact}/>
+        <Route path='/about' component={About}/>
+        <Route path='/contact' component={Contact}/>
+        <Route path='/admin' component={Login}/>
       </Container>
     </React.Fragment>
   );
