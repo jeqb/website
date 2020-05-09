@@ -1,4 +1,7 @@
 import React from 'react';
+import { withRouter, NavLink, Link } from 'react-router-dom';
+
+// buttons/style
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,19 +31,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ToGitHub = () => {
+const handleGitHubClick = () => {
   var win = window.open('https://github.com/jeqb/');
   win.focus();
 };
 
 
-const ToLinkedIn = () => {
+const handleLinkedInClick = () => {
   var win = window.open('https://www.linkedin.com/in/james-bonner-367012b1');
   win.focus();
 };
 
 
-const Header = () => {
+const Header = ({context}) => {
   const classes = useStyles();
 
   return (
@@ -48,28 +51,28 @@ const Header = () => {
       <AppBar position="sticky" className={classes.appbar}>
         <Toolbar>
         <Tooltip title="Home">
-          <IconButton className={classes.icon} color="inherit" aria-label="menu">
+          <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/">
               <HomeIcon />
           </IconButton>
           </Tooltip>
           <Tooltip title="About">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu">
+            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/about">
               <AccountBoxIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Contact">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu">
+            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/contact">
               <EmailIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="GitHub">
             <IconButton className={classes.icon} color="inherit" aria-label="menu">
-              <GitHubIcon onClick={ToGitHub}/>
+              <GitHubIcon onClick={handleGitHubClick}/>
             </IconButton>
           </Tooltip>
           <Tooltip title="LinkedIn">
             <IconButton className={classes.icon} color="inherit" aria-label="menu">
-              <LinkedInIcon onClick={ToLinkedIn}/>
+              <LinkedInIcon onClick={handleLinkedInClick}/>
             </IconButton>
           </Tooltip>
         </Toolbar>
@@ -79,4 +82,4 @@ const Header = () => {
 };
 
 
-export default Header;
+export default withRouter(Header);
