@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using MediatR;
 using Persistence;
 
@@ -25,7 +27,8 @@ namespace Application.Messages
             {
                 var message = await _context.Message.FindAsync(request.Id);
 
-                if (message == null) throw new Exception("Message not found");
+                if (message == null)
+                    throw new RestException(HttpStatusCode.NotFound, new{Message = "Not Found" });
 
                 _context.Remove(message);
 

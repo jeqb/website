@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -11,8 +12,11 @@ namespace Application.Messages
     {
         public class Command : IRequest
         {
+            [Required]
             public string Name { get; set; }
+            [Required]
             public string Email { get; set; }
+            [Required]
             public string MessageContent { get; set; }
             public DateTime MessageDate { get; set; }
         }
