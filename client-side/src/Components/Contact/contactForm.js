@@ -1,4 +1,7 @@
-import React, { useState, setState } from 'react';
+import React, { useState, useContext } from 'react';
+
+// data
+import MessageCache from '../../Data/messageCache';
 
 // styles and visuals
 import { Container, TextField, Typography, Button } from '@material-ui/core';
@@ -25,22 +28,27 @@ const useStyles = makeStyles((theme) => ({
 
 const ContactForm = () => {
   const classes = useStyles();
+  const messageCache = useContext(MessageCache)
   const [submit, setSubmit] = useState(0);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [messageContent, setMessageContent] = useState('');
+
 
   const handleSubmit = () => {
-    console.log('name');
-    console.log(name);
-
-    console.log('email');
-    console.log(email);
-
-    console.log('message');
-    console.log(message);
+    // update page
     setSubmit(1)
+    
+    // submit to backend
+    var message = {
+      name: name,
+      email: email,
+      messageContent: messageContent
+    }
+
+    messageCache.createMessage(message);
   };
+
 
   switch(submit) {
     case 0:
@@ -69,7 +77,7 @@ const ContactForm = () => {
               multiline
               rows={10}
               fullWidth={true}
-              onChange={e => setMessage(e.target.value)}
+              onChange={e => setMessageContent(e.target.value)}
             />
           </div>
           <Button variant="contained" size="large" color="primary" onClick={handleSubmit}>
