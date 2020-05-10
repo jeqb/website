@@ -19,7 +19,15 @@ const BlogPosts = {
   delete: (id) => requests.post(`/BolgPosts/${id}`)
 };
 
+const Messages = {
+  list: () => requests.get('/Messages'),
+  details: (id) => requests.post(`/Messages/${id}`),
+  create: (message) => requests.post('/Messages', message),
+  delete: (id) => requests.post(`/Messages/${id}`)
+}
+
 
 export default {
-  BlogPosts
+  BlogPosts,
+  Messages
 }
