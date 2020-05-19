@@ -1,50 +1,52 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Route, withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useEffect, useContext } from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 // components
-import Header from './Components/layout/Header';
-import BlogContainer from './Components/Blog/BlogContainer';
-import About from './Components/static/About';
-import Home from './Components/static/Home';
-import ContactContainer from './Components/Contact/contactContainer';
-import MessageContainer from './Components/messages/messageContainer';
+import Header from './layout/Header';
+import MessageContainer from './messages/MessageContainer';
+import BlogContainer from './blog/BlogContainer';
+import ContactContainer from './contact/ContactContainer';
+import LoadingComp from './layout/LoadingComponent';
 
 // data
-import BlogPostCache from './Data/postCache';
-import MessageCache from './Data/messageCache';
+import api from './store/api';
+import MessageStore from './store/messageStore';
+import BlogPostStore from './store/blogPostStore';
 import { observer } from 'mobx-react-lite';
-import Login from './Components/Admin/Login';
 
 const App = () => {
-  const postCache = useContext(BlogPostCache);
-  const messageCache = useContext(MessageCache);
+  const messageStore = useContext(MessageStore);
+  const blogPostStore = useContext(BlogPostStore);
 
   useEffect(() => {
-    postCache.loadBlogPosts();
-    // THE MESSAGES SHOULd NOT LOAD FOR NONE AUTHENTICATED CLIENTS
-    messageCache.loadMessages();
-    // REMEMBER TO REMOVE THIS
-  }, [postCache, messageCache]);
+    blogPostStore.loadBlogPosts();
 
-  console.log('Messages: ')
-  console.log(messageCache.Messages)
-
-  console.log('BlogPosts')
-  console.log(postCache.blogPosts)
+    messageStore.loadMessages();
+  }, [blogPostStore, messageStore]);
 
   return (
     <React.Fragment>
-      <Header />
+      <Header/>
       <Container>
-        <Route exact path='/' component={Home}/>
-        <Route path='/about' component={About}/>
-        <Route path='/contact' component={ContactContainer}/>
-        <Route path='/admin' component={Login}/>
-        <Route path='/messages' component={MessageContainer}/>
+        
       </Container>
+      {/**
+      <ContactContainer
+        handleCreateMessage={handleCreateMessage}
+      />
+      **/}
+      {/**
+      <BlogContainer
+        blogPosts={blogPostStore.blogPosts}
+        handleSelectBlogPost={handleSelectBlogPost}
+      />
+      **/}
+      
+      <MessageContainer/>
+      
     </React.Fragment>
-  );
+  )
 }
 
 export default withRouter(observer(App));

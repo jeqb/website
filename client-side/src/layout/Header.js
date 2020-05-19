@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, NavLink, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 // buttons/style
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,17 +51,20 @@ const Header = ({context}) => {
       <AppBar position="sticky" className={classes.appbar}>
         <Toolbar>
         <Tooltip title="Home">
-          <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/">
+          {/**<IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/"> **/}
+          <IconButton className={classes.icon} color="inherit" aria-label="menu">
               <HomeIcon />
           </IconButton>
           </Tooltip>
           <Tooltip title="About">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/about">
+            {/**<IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/about"> **/}
+            <IconButton className={classes.icon} color="inherit" aria-label="menu">
               <AccountBoxIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Contact">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/contact">
+            {/**<IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/contact"> **/}
+            <IconButton className={classes.icon} color="inherit" aria-label="menu">
               <EmailIcon />
             </IconButton>
           </Tooltip>

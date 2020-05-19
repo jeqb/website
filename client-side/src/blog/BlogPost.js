@@ -20,15 +20,17 @@ const useStyles = makeStyles({
 
 
 const BlogPost = ({
+  id,
   title,
   CreatedDateTime,
-  body
+  body,
+  handleSelectBlogPost
 }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={()=> handleSelectBlogPost(id)}>
         <h1>
           {title}
         </h1>
