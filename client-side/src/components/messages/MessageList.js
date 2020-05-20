@@ -5,7 +5,7 @@ import MessagePreview from './MessagePreview';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../store/messageStore';
+import MessageStore from '../../store/messageStore';
 
 const MessageList = () => {
   const messageStore = useContext(MessageStore);

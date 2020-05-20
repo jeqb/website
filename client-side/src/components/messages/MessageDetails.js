@@ -8,7 +8,7 @@ import LoadingCompnent from '../layout/LoadingComponent';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../store/messageStore';
+import MessageStore from '../../store/messageStore';
 
 // styles
 import { makeStyles } from '@material-ui/core/styles';

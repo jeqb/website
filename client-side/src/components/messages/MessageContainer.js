@@ -8,7 +8,7 @@ import MessageDetails from './MessageDetails';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../store/messageStore';
+import MessageStore from '../../store/messageStore';
 
 const MessageContainer = () => {
   const messageStore = useContext(MessageStore);

@@ -7,7 +7,7 @@ import MessageSubmitted from '../static/MessageSubmitted';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../store/messageStore';
+import MessageStore from '../../store/messageStore';
 
 // styles and visuals
 import { Container, Typography } from '@material-ui/core';

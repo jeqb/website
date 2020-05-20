@@ -3,13 +3,13 @@ import { Route, withRouter } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 // components
-import Header from './layout/Header';
-import MessageContainer from './messages/MessageContainer';
-import MessageDetails from './messages/MessageDetails';
-import Login from './admin/Login';
-import Home from './static/Home';
-import About from './static/About';
-import ContactContainer from './contact/ContactContainer';
+import Header from './components/layout/Header';
+import MessageContainer from './components/messages/MessageContainer';
+import MessageDetails from './components/messages/MessageDetails';
+import Login from './components/admin/Login';
+import Home from './components/static/Home';
+import About from './components/static/About';
+import ContactContainer from './components/contact/ContactContainer';
 
 // data
 import { observer } from 'mobx-react-lite';
