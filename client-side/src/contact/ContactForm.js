@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 // styles and visuals
-import { Container, TextField, Typography, Button } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 // data

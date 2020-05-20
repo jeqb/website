@@ -19,7 +19,7 @@ const MessageList = () => {
   return (
     <div>
       {
-        messageStore.messages.map( (message) => {
+        messages.map( (message) => {
           return(
             <MessagePreview
               key={message.id}

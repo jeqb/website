@@ -9,7 +9,6 @@ import MessageDetails from './messages/MessageDetails';
 import Login from './admin/Login';
 import Home from './static/Home';
 import About from './static/About';
-import BlogContainer from './blog/BlogContainer';
 import ContactContainer from './contact/ContactContainer';
 
 // data

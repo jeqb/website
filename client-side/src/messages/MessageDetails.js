@@ -43,7 +43,7 @@ const MessageDetails = ({
 
   useEffect(() => {
     loadMessage(match.params.id)
-  }, [loadMessage])
+  }, [loadMessage, match])
 
   if (loading || !activeMessage) return <LoadingCompnent/>
 

@@ -1,4 +1,4 @@
-import { observable, action, computed, runInAction, decorate, configure } from 'mobx';
+import { observable, action, computed, decorate } from 'mobx';
 import { createContext } from 'react';
 
 // data
@@ -69,7 +69,7 @@ class MessageStore {
 
   // action not needed because internal
   getMessage = (id) => {
-    return this. messageRegistry.get(id);
+    return this.messageRegistry.get(id);
   }
 
   // action
@@ -93,6 +93,7 @@ decorate(MessageStore, {
   activeMessage: observable,
   submitting: observable,
   hasSubmittedMessage: observable,
+  messages: computed,
   loadMessages: action,
   createMessage: action,
   loadMessage: action,

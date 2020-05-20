@@ -22,6 +22,7 @@ const Home = () => {
           maxHeight: '40%',
           objectFit: 'contain'
         }}
+        alt={'This page is under construction.'}
       />
     </div>
   );

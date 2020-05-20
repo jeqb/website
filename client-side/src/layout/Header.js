@@ -50,30 +50,30 @@ const Header = ({context}) => {
     <div className={classes.root}>
       <AppBar position="sticky" className={classes.appbar}>
         <Toolbar>
-        <Tooltip title="Home">
-          <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/">
-              <HomeIcon />
-          </IconButton>
+          <Tooltip title="Home">
+            <IconButton className={classes.icon} color="inherit" aria-label="home" component={Link} to="/">
+                <HomeIcon />
+            </IconButton>
           </Tooltip>
           <Tooltip title="About">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/about">
-              <AccountBoxIcon />
-            </IconButton>
+              <IconButton className={classes.icon} color="inherit" aria-label="about" component={Link} to="/about">
+                <AccountBoxIcon />
+              </IconButton>
           </Tooltip>
           <Tooltip title="Contact">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/contact">
-              <EmailIcon />
-            </IconButton>
+              <IconButton className={classes.icon} color="inherit" aria-label="contact" component={Link} to="/contact">
+                <EmailIcon />
+              </IconButton>
           </Tooltip>
           <Tooltip title="GitHub">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu">
-              <GitHubIcon onClick={handleGitHubClick}/>
-            </IconButton>
+              <IconButton className={classes.icon} color="inherit" aria-label="github" onClick={handleGitHubClick}>
+                <GitHubIcon />
+              </IconButton>
           </Tooltip>
           <Tooltip title="LinkedIn">
-            <IconButton className={classes.icon} color="inherit" aria-label="menu">
-              <LinkedInIcon onClick={handleLinkedInClick}/>
-            </IconButton>
+              <IconButton className={classes.icon} color="inherit" aria-label="linkedin" onClick={handleLinkedInClick}>
+                <LinkedInIcon />
+              </IconButton>
           </Tooltip>
         </Toolbar>
       </AppBar>
