@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 // components
 import Container from '@material-ui/core/Container';
@@ -13,11 +13,15 @@ import MessageStore from '../store/messageStore';
 const MessageContainer = () => {
   const messageStore = useContext(MessageStore);
 
+  useEffect(() => {
+    messageStore.loadMessages();
+  },[messageStore]);
+
   if (messageStore.loading) {
     return <LoadingComp/>
   }
 
-  if (messageStore.selectedMessage === undefined) {
+  if (messageStore.activeMessage === undefined) {
     return (
       <React.Fragment>
         <Container maxWidth="md">
@@ -27,12 +31,12 @@ const MessageContainer = () => {
     );
   }
 
-  if (messageStore.selectedMessage !== undefined) {
+  if (messageStore.activeMessage !== undefined) {
     return (
       <React.Fragment>
         <Container maxWidth="md">
           <MessageDetails
-            message={messageStore.selectedMessage}
+            message={messageStore.activeMessage}
           />
         </Container>
       </React.Fragment>

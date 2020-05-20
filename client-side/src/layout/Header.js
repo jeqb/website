@@ -51,20 +51,17 @@ const Header = ({context}) => {
       <AppBar position="sticky" className={classes.appbar}>
         <Toolbar>
         <Tooltip title="Home">
-          {/**<IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/"> **/}
-          <IconButton className={classes.icon} color="inherit" aria-label="menu">
+          <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/">
               <HomeIcon />
           </IconButton>
           </Tooltip>
           <Tooltip title="About">
-            {/**<IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/about"> **/}
-            <IconButton className={classes.icon} color="inherit" aria-label="menu">
+            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/about">
               <AccountBoxIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Contact">
-            {/**<IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/contact"> **/}
-            <IconButton className={classes.icon} color="inherit" aria-label="menu">
+            <IconButton className={classes.icon} color="inherit" aria-label="menu" component={Link} to="/contact">
               <EmailIcon />
             </IconButton>
           </Tooltip>

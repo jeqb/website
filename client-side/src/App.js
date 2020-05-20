@@ -1,52 +1,35 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 // components
 import Header from './layout/Header';
 import MessageContainer from './messages/MessageContainer';
+import MessageDetails from './messages/MessageDetails';
+import Login from './admin/Login';
+import Home from './static/Home';
+import About from './static/About';
 import BlogContainer from './blog/BlogContainer';
 import ContactContainer from './contact/ContactContainer';
-import LoadingComp from './layout/LoadingComponent';
 
 // data
-import api from './store/api';
-import MessageStore from './store/messageStore';
-import BlogPostStore from './store/blogPostStore';
 import { observer } from 'mobx-react-lite';
 
 const App = () => {
-  const messageStore = useContext(MessageStore);
-  const blogPostStore = useContext(BlogPostStore);
-
-  useEffect(() => {
-    blogPostStore.loadBlogPosts();
-
-    messageStore.loadMessages();
-  }, [blogPostStore, messageStore]);
 
   return (
     <React.Fragment>
       <Header/>
       <Container>
-        
+        <Route exact path='/' component={Home}/>
+        <Route path='/about' component={About}/>
+        <Route path='/contact' component={ContactContainer}/>
+        <Route path='/admin' component={Login}/>
+        <Route exact path='/messages' component={MessageContainer}/>
+        <Route path='/messages/:id' component={MessageDetails}/>
       </Container>
-      {/**
-      <ContactContainer
-        handleCreateMessage={handleCreateMessage}
-      />
-      **/}
-      {/**
-      <BlogContainer
-        blogPosts={blogPostStore.blogPosts}
-        handleSelectBlogPost={handleSelectBlogPost}
-      />
-      **/}
-      
-      <MessageContainer/>
-      
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default withRouter(observer(App));

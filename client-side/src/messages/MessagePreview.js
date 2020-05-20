@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
 
 // styling
 import { makeStyles } from '@material-ui/core/styles';
@@ -64,7 +65,8 @@ const MessagePreview = ({
 
   return(
     <Card className={classes.root} >
-      <CardActionArea className={classes.CardActionArea} onClick={()=> onClickHandler(id)}>
+      {/*<CardActionArea className={classes.CardActionArea} onClick={()=> onClickHandler(id)}>*/}
+      <CardActionArea className={classes.CardActionArea} component={Link} to={`/messages/${id}`}>
           <div className={classes.messageItem}>
             <div className={classes.label}>
               Name
@@ -102,4 +104,4 @@ const MessagePreview = ({
   );
 };
 
-export default MessagePreview;
+export default withRouter(MessagePreview);

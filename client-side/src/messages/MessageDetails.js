@@ -1,9 +1,10 @@
 import React, { useContext, useEffect }  from 'react';
+import { withRouter } from 'react-router-dom';
 
 // components
 import Card from '@material-ui/core/Card';
 import Container from '@material-ui/core/Container';
-import LoadingComp from '../layout/LoadingComponent';
+import LoadingCompnent from '../layout/LoadingComponent';
 
 // data
 import { observer } from 'mobx-react-lite';
@@ -33,10 +34,18 @@ const useStyles = makeStyles({
 });
 
 const MessageDetails = ({
-  message
+  match
 }) => {
+  console.log('MessageDetails rendered')
   const classes = useStyles();
   const messageStore = useContext(MessageStore);
+  const { loadMessage, activeMessage, loading } = messageStore;
+
+  useEffect(() => {
+    loadMessage(match.params.id)
+  }, [loadMessage])
+
+  if (loading || !activeMessage) return <LoadingCompnent/>
 
   return (
     <Container className={classes.root} maxWidth="md">
@@ -47,7 +56,7 @@ const MessageDetails = ({
             From:
           </div>
           <div className={classes.item}>
-            {message.name}
+            {activeMessage.name}
           </div>
         </div>
         <div className={classes.attribute}>
@@ -55,18 +64,18 @@ const MessageDetails = ({
             Email:
           </div>
           <div className={classes.item}>
-            {message.email}
+            {activeMessage.email}
           </div>
         </div>
         <div>
           message:
         </div>
         <div >
-          {message.messageContent}
+          {activeMessage.messageContent}
         </div>
       </Card>
     </Container>
   );
 };
 
-export default observer(MessageDetails);
+export default withRouter(observer(MessageDetails));
