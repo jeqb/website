@@ -1,11 +1,14 @@
-import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // styling
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 
+
+// data
+import { observer } from 'mobx-react-lite';
 
 const shortenString = (s) => {
   if (s.length > 20) {
@@ -54,9 +57,18 @@ const MessagePreview = ({
   email,
   messageContent,
   messageDate,
-  onClickHandler,
+  history
 }) => {
+  console.log('MessagePreview: rendered')
   const classes = useStyles();
+
+  const onClickHandler = (message_id) => {
+    // DEBUG
+    console.log(`MessagePreview: onClickHandler(): called with message_id: ${message_id}`);
+
+    var url = `/messages/${message_id}`;
+    history.push(url);
+  }
 
   // condence strings in the event that they are too long to display
   var nameSlice = shortenString(name);
@@ -65,8 +77,7 @@ const MessagePreview = ({
 
   return(
     <Card className={classes.root} >
-      {/*<CardActionArea className={classes.CardActionArea} onClick={()=> onClickHandler(id)}>*/}
-      <CardActionArea className={classes.CardActionArea} component={Link} to={`/messages/${id}`}>
+      <CardActionArea className={classes.CardActionArea} onClick={()=> onClickHandler(id)}>
           <div className={classes.messageItem}>
             <div className={classes.label}>
               Name
@@ -104,4 +115,4 @@ const MessagePreview = ({
   );
 };
 
-export default withRouter(MessagePreview);
+export default withRouter(observer(MessagePreview));

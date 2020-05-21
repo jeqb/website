@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 
 // components
 import Container from '@material-ui/core/Container';
@@ -17,31 +18,15 @@ const MessageContainer = () => {
     messageStore.loadMessages();
   },[messageStore]);
 
-  if (messageStore.loading) {
-    return <LoadingComp/>
-  }
+  if (messageStore.loading) return <LoadingComp/>
 
-  if (messageStore.activeMessage === undefined) {
-    return (
-      <React.Fragment>
-        <Container maxWidth="md">
-          <MessageList/>
-        </Container>
-      </React.Fragment>
-    );
-  }
-
-  if (messageStore.activeMessage !== undefined) {
-    return (
-      <React.Fragment>
-        <Container maxWidth="md">
-          <MessageDetails
-            message={messageStore.activeMessage}
-          />
-        </Container>
-      </React.Fragment>
-    );
-  }
+  return (
+    <React.Fragment>
+      <Container maxWidth="md">
+        <MessageList/>
+      </Container>
+    </React.Fragment>
+  );
 }
 
-export default observer(MessageContainer);
+export default withRouter(observer(MessageContainer));

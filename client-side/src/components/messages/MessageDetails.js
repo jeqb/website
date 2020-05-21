@@ -34,18 +34,45 @@ const useStyles = makeStyles({
 });
 
 const MessageDetails = ({
-  match
+  match,
+  history
 }) => {
-  console.log('MessageDetails rendered')
+  // DEBUG
+  console.log('MessageDetails: rendered')
+
   const classes = useStyles();
   const messageStore = useContext(MessageStore);
-  const { loadMessage, activeMessage, loading } = messageStore;
+  const { loadMessage, activeMessage } = messageStore
+
+  // DEBUG
+  console.log(`MessageDetails: the active message is: ${messageStore.activeMessage}`)
+  console.log(`MessageDetails: the loading variable is : ${messageStore.loading}`)
+  console.log(`MessageDetails: the registry keys are: ${Array.from(messageStore.messageRegistry.keys())}`)
+
 
   useEffect(() => {
-    loadMessage(match.params.id)
-  }, [loadMessage, match])
+    // DEBUG
+    console.log('MessageDetails: running useEffect')
 
-  if (loading || !activeMessage) return <LoadingCompnent/>
+    loadMessage(match.params.id);
+  }, [loadMessage]);
+
+  /*
+  if (messageStore.loading) {
+    // DEBUG
+    console.log('MessageDetails: loading component triggered by loading variable')
+    console.log(`MessageDetails: loading value is ${messageStore.loading}`)
+    return <LoadingCompnent/>
+  }
+  */
+
+  if (messageStore.activeMessage === undefined) {
+    // DEBUG
+    console.log('MessageDetails: loading component triggered by loading variable')
+    console.log(`MessageDetails: loading value is ${messageStore.activeMessage}`)
+    return <LoadingCompnent/>
+  }
+
 
   return (
     <Container className={classes.root} maxWidth="md">
