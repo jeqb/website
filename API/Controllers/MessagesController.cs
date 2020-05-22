@@ -7,42 +7,34 @@ using System.Collections.Generic;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MessagesController : ControllerBase
+    public class MessagesController : ParentController
     {
-        private readonly IMediator _mediator;
-        public MessagesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         // GET api/Messages
         [HttpGet]
         public async Task<ActionResult<List<Message>>> List()
         {
-            return await _mediator.Send(new List.Query());
+            return await Mediator.Send(new List.Query());
         }
 
         // GET api/Messages/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Message>> Details(int id)
         {
-            return await _mediator.Send(new Details.Query{Id = id});
+            return await Mediator.Send(new Details.Query{Id = id});
         }
 
         // POST api/Messages
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
-            return await _mediator.Send(command);
+            return await Mediator.Send(command);
         }
 
         // DELETE api/Messages/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> Delete(int id)
         {
-            return await _mediator.Send(new Delete.Command{Id = id});
+            return await Mediator.Send(new Delete.Command{Id = id});
         }
     }
 }

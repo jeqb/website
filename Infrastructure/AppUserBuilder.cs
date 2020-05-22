@@ -35,9 +35,10 @@ namespace Infrastructure
 
         public AppUserBuilder AddPassword(string password)
         {
-            _Salt = PasswordTool.MakeSalt();
+            var tool = new PasswordTool();
+            _Salt = tool.MakeSalt();
 
-            _Passwordhash = PasswordTool.HashPassword(password, _Salt);
+            _Passwordhash = tool.HashPassword(password, _Salt);
 
             return this;
         }
