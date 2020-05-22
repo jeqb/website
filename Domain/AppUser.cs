@@ -12,6 +12,6 @@ namespace Domain
         public string PasswordHash { get; set; }
         public int IsLockedOut { get; set; }
         public DateTime CreatedDateTime { get; set; }
-        public DateTime UpdatedDateTime { get; set; }
+        public DateTime? UpdatedDateTime { get; set; }
     }
 }
