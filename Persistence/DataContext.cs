@@ -12,5 +12,7 @@ namespace Persistence
 
         public DbSet<BlogPost> BlogPost { get; set; }
         public DbSet<Message> Message { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<LoginAttempt> LoginAttempt { get; set; }
     }
 }
