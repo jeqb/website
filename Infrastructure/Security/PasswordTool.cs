@@ -1,6 +1,6 @@
 using System;
 using System.Security.Cryptography;
-using Infrastructure.Interfaces;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Infrastructure

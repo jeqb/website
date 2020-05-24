@@ -4,6 +4,7 @@ using Domain;
 using System.Threading.Tasks;
 using Application.Messages;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -11,6 +12,7 @@ namespace API.Controllers
     {
         // GET api/Messages
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<List<Message>>> List()
         {
             return await Mediator.Send(new List.Query());
@@ -18,6 +20,7 @@ namespace API.Controllers
 
         // GET api/Messages/{id}
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Message>> Details(int id)
         {
             return await Mediator.Send(new Details.Query{Id = id});
@@ -32,6 +35,7 @@ namespace API.Controllers
 
         // DELETE api/Messages/{id}
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<Unit>> Delete(int id)
         {
             return await Mediator.Send(new Delete.Command{Id = id});

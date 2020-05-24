@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Domain;
 using MediatR;
 using Application.BlogPosts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -26,6 +27,7 @@ namespace API.Controllers
 
         // POST api/BlogPosts
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
             return await Mediator.Send(command);
@@ -33,6 +35,7 @@ namespace API.Controllers
 
         // PUT api/BlogPosts/{id}
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<ActionResult<Unit>> Edit(int id, Edit.Command command)
         {
             command.Id = id;
@@ -41,6 +44,7 @@ namespace API.Controllers
 
         // DELETE api/BlogPosts/{id}
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<ActionResult<Unit>> Delete(int id)
         {
             return await Mediator.Send(new Delete.Command{Id = id});

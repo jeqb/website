@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Domain;
 using MediatR;
 using Persistence;
-using Infrastructure.Interfaces;
+using Infrastructure.Security;
 using System.ComponentModel.DataAnnotations;
 using Application.Errors;
 using System.Net;
@@ -14,25 +14,27 @@ namespace Application.User
 {
     public class Login
     {
-        public class Query : IRequest<AppUser>
+        public class Query : IRequest<ReturnUser>
         {
             [Required]
             public string Email { get; set; }
             [Required]
             public string Password { get; set; }
         }
-        public class Handler : IRequestHandler<Query, AppUser>
+        public class Handler : IRequestHandler<Query, ReturnUser>
         {
             private readonly DataContext _context;
             private readonly IPasswordTool _passwordTool;
+            private readonly IJwtTool _jwtTool;
 
-            public Handler(DataContext context, IPasswordTool passwordTool)
+            public Handler(DataContext context, IPasswordTool passwordTool, IJwtTool jwtTool)
             {
+                _jwtTool = jwtTool;
                 _context = context;
                 _passwordTool = passwordTool;
             }
 
-            public async Task<AppUser> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<ReturnUser> Handle(Query request, CancellationToken cancellationToken)
             {
                 // poor implementation to search by email addres, but it works for now
                 var userResult = await _context.AppUser.ToArrayAsync();
@@ -40,7 +42,7 @@ namespace Application.User
                 if (userResult.Length == 0)
                     throw new RestException(HttpStatusCode.Unauthorized);
 
-                for (int i = 0; i < userResult.Length; i ++)
+                for (int i = 0; i < userResult.Length; i++)
                 {
                     var user = userResult[i];
 
@@ -48,7 +50,15 @@ namespace Application.User
                     {
                         var sucess = _passwordTool.ValidatePassword(request.Password, user.Salt, user.PasswordHash);
                         if (sucess)
-                            return user;
+                        {
+                            return new ReturnUser
+                            {
+                                UserName = user.UserName,
+                                Email = user.Email,
+                                DisplayName = user.DisplayName,
+                                Token = _jwtTool.CreateToken(user)
+                            };
+                        };
                     }
                 }
 
