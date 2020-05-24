@@ -1,6 +1,35 @@
 import axios from 'axios';
+import { history } from '../index.js';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+
+axios.interceptors.response.use(undefined, error => {
+  console.log(error);
+  // backend is down for sure
+  if(error.message === "Network Error"){
+    history.push('/InternalServerError');
+  }
+
+  // backend is alive and we got a status code.
+  const { status } = error.response;
+
+  if(status === 400) {
+    history.push('/badrequest');
+  }
+
+  if(status === 401) {
+    history.push('/Unauthorized');
+  }
+
+  if(status === 404) {
+    history.push('/NotFound');
+  }
+
+  if(status >= 500) {
+    history.push('/InternalServerError');
+  }
+
+});
 
 const responseBody = (response) => response.data;
 
