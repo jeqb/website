@@ -2,7 +2,7 @@ import { observable, action, computed, decorate } from 'mobx';
 import { createContext } from 'react';
 
 // data
-import api from './api';
+import api from '../api/api';
 
 class MessageStore {
   // observables

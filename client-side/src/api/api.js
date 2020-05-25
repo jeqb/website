@@ -58,8 +58,12 @@ const Messages = {
   delete: (id) => requests.delete(`/Messages/${id}`)
 }
 
+const User = {
+  login: (credentials) => requests.post('/user/login', credentials)
+}
 
 export default {
   BlogPosts,
-  Messages
+  Messages,
+  User
 }
