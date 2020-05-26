@@ -7,7 +7,7 @@ import MessageSubmitted from '../static/MessageSubmitted';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../../store/messageStore';
+import { RootStoreContext } from '../../store/rootStore';
 
 // styles and visuals
 import { Container, Typography } from '@material-ui/core';
@@ -23,10 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ContactContainer = () => {
-  const messageStore = useContext(MessageStore);
+  const rootStore = useContext(RootStoreContext);
+  const { submitting, hasSubmittedMessage } = rootStore.messageStore;
   const classes = useStyles();
 
-  if (messageStore.submitting) return <LoadingComp/>
+  if (submitting) return <LoadingComp/>
 
   return (
     <Container className={classes.root}>
@@ -34,7 +35,7 @@ const ContactContainer = () => {
           Contact  
       </Typography>
       {
-        messageStore.hasSubmittedMessage  
+        hasSubmittedMessage  
           ? <MessageSubmitted/>
           : <ContactFrom/>
       }

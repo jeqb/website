@@ -1,10 +1,14 @@
-import { observable, action, computed, decorate } from 'mobx';
-import { createContext } from 'react';
+import { observable, action, computed,
+  decorate, runInAction, configure } from 'mobx';
 
 // data
 import api from '../api/api';
 
 class MessageStore {
+  constructor(rootStore) {
+    this.rootStore = rootStore;
+  }
+
   // observables
   messageRegistry = new Map();
   hasInitialLoad = false;
@@ -25,13 +29,20 @@ class MessageStore {
     this.hasInitialLoad = true;
     this.loading = true;
     try {
-      const messages = await api.Messages.list();
-        messages.forEach(message => {
-          message.messageDate = message.messageDate.split('.')[0];
-          this.messageRegistry.set(message.id, message);
+      api.Messages.list()
+        .then((response) => {
+          response.forEach(message => {
+            message.messageDate = message.messageDate.split('.')[0];
+            this.messageRegistry.set(message.id, message);
+          });
+          this.loading = false;
+          console.log('MessageStore.loadMessages(): successfully run')
+        })
+        .catch((error) => {
+          this.loading = false;
+          console.log('MessageStore.loadMessages(): Error loading messages has occured')
+          console.log(error);
         });
-        this.loading = false;
-        console.log('MessageStore.loadMessages(): successfully run')
     } catch (error) {
       this.loading = false;
       console.log('MessageStore.loadMessages(): Error loading messages has occured')
@@ -45,11 +56,18 @@ class MessageStore {
     console.log('MessageStore.createMessage(): called')
     this.submitting = true;
     try {
-      await api.Messages.create(message);
-        this.messageRegistry.set(message.id, message);
-        this.hasSubmittedMessage = true;
-        this.submitting = false;
-        console.log('MessageStore.createMessage(): successfully run')
+      api.Messages.create(message)
+        .then(() => {
+          this.messageRegistry.set(message.id, message);
+          this.hasSubmittedMessage = true;
+          this.submitting = false;
+          console.log('MessageStore.createMessage(): successfully run')
+        })
+        .catch((error) => {
+          this.loading = false;
+          console.log('MessageStore.loadMessages(): Error loading messages has occured')
+          console.log(error);
+        });
     } catch(error) {
       console.log('MessageStore.createMessage(): Error loading messages has occured')
       console.log(error)
@@ -68,16 +86,22 @@ class MessageStore {
       this.loading = false;
       console.log('MessageStore.loadMessage(): successfully run')
     } else {
-      console.log(`MessageStore.loadMessage(): message was ${message}. re-running details() call`)
       try {
-        message = await api.Messages.details(id);
-          this.activeMessage = message;
-          this.loading = false;
-          console.log('MessageStore.loadMessage(): details() api called successfull')
+        api.Messages.details(id)
+          .then((response) => {
+            this.activeMessage = response;
+            this.loading = false;
+            console.log('MessageStore.loadMessage(): details() api called successfull')
+          })
+          .catch((error) => {
+            this.loading = false;
+            console.log('MessageStore.loadMessages(): Error loading messages has occured')
+            console.log(error);
+          });
       } catch (error) {
-        console.log('MessageStore.loadMessage(): details() api FAILED')
-        console.log(error);
-        this.loading = false;
+          console.log('MessageStore.loadMessage(): details() api FAILED')
+          console.log(error);
+          this.loading = false;
       }
     }
   }
@@ -119,4 +143,4 @@ decorate(MessageStore, {
   setActiveMessage: action,
 });
 
-export default createContext( new MessageStore() );
+export default MessageStore;

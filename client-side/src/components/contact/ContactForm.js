@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../../store/messageStore';
+import { RootStoreContext } from '../../store/rootStore';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
 const ContactForm = () => {
   const classes = useStyles();
-  const messageStore = useContext(MessageStore);
+  const rootStore = useContext(RootStoreContext);
+  const { createMessage } = rootStore.messageStore;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [messageContent, setMessageContent] = useState('');
@@ -44,7 +45,7 @@ const ContactForm = () => {
     }
 
     try {
-      messageStore.createMessage(message);
+      createMessage(message);
       console.log(`Message successfully submitted`);
     }
     catch(e) {

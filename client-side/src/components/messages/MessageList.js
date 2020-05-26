@@ -6,12 +6,12 @@ import MessagePreview from './MessagePreview';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../../store/messageStore';
+import { RootStoreContext } from '../../store/rootStore';
 
 const MessageList = () => {
   console.log('MessageList rendered')
-  const messageStore = useContext(MessageStore);
-  const { messages } = messageStore
+  const rootStore = useContext(RootStoreContext);
+  const { messages } = rootStore.messageStore
 
   return (
     <div>

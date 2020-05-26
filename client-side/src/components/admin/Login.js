@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LoadingComponent from '../layout/LoadingComponent';
 
 // data
-import UserStore from '../../store/userStore';
+import { RootStoreContext } from '../../store/rootStore';
 import { observer } from 'mobx-react-lite';
 
 
@@ -39,8 +39,8 @@ const Login = () => {
   const [email, setEmail] = useState(undefined);
   const [password, setPassword] = useState(undefined);
   const classes = useStyles();
-  const userStore = useContext(UserStore);
-  const { loggingIn, login } = userStore;
+  const rootStore = useContext(RootStoreContext);
+  const { loggingIn, login, token } = rootStore.userStore;
 
   const onClickHandler = () => {
     const payload = {
@@ -48,19 +48,12 @@ const Login = () => {
       Password: password
     };
 
-    console.log('Login: attempting login');
-    try {
-      login(payload).then(() => {
-        if (userStore.token !== undefined) {
-          history.push('/')
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    login(payload)
   }
 
   if (loggingIn) return <LoadingComponent/>
+
+  if (token !== undefined) history.push('/');
 
   return (
     <Container className={classes.root}>

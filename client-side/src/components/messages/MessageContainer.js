@@ -9,16 +9,17 @@ import MessageDetails from './MessageDetails';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../../store/messageStore';
+import { RootStoreContext } from '../../store/rootStore';
 
 const MessageContainer = () => {
-  const messageStore = useContext(MessageStore);
+  const rootStore = useContext(RootStoreContext);
+  const { loadMessages, loading } = rootStore.messageStore
 
   useEffect(() => {
-    messageStore.loadMessages();
-  },[messageStore]);
+    loadMessages();
+  },[loadMessages]);
 
-  if (messageStore.loading) return <LoadingComp/>
+  if (loading) return <LoadingComp/>
 
   return (
     <React.Fragment>

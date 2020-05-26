@@ -3,6 +3,15 @@ import { history } from '../index.js';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+axios.interceptors.request.use((config) => {
+  const token = window.localStorage.getItem('jwt');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config
+}, error => {
+  return Promise.reject(error)
+})
+
+
 axios.interceptors.response.use(undefined, error => {
   console.log(error);
   // backend is down for sure
@@ -31,7 +40,7 @@ axios.interceptors.response.use(undefined, error => {
 
 });
 
-const responseBody = (response) => response.data;
+const responseBody = (response) => response.data
 
 const sleep = (ms) => (response) =>
   new Promise(resolve => setTimeout(() => resolve(response), ms));

@@ -8,7 +8,7 @@ import LoadingCompnent from '../layout/LoadingComponent';
 
 // data
 import { observer } from 'mobx-react-lite';
-import MessageStore from '../../store/messageStore';
+import { RootStoreContext } from '../../store/rootStore';
 
 // styles
 import { makeStyles } from '@material-ui/core/styles';
@@ -41,13 +41,13 @@ const MessageDetails = ({
   console.log('MessageDetails: rendered')
 
   const classes = useStyles();
-  const messageStore = useContext(MessageStore);
-  const { loadMessage, activeMessage } = messageStore
+  const rootStore = useContext(RootStoreContext);
+  const { loadMessage, activeMessage, messageRegistry, loading } = rootStore.messageStore
 
   // DEBUG
-  console.log(`MessageDetails: the active message is: ${messageStore.activeMessage}`)
-  console.log(`MessageDetails: the loading variable is : ${messageStore.loading}`)
-  console.log(`MessageDetails: the registry keys are: ${Array.from(messageStore.messageRegistry.keys())}`)
+  console.log(`MessageDetails: the active message is: ${activeMessage}`)
+  console.log(`MessageDetails: the loading variable is : ${loading}`)
+  console.log(`MessageDetails: the registry keys are: ${Array.from(messageRegistry.keys())}`)
 
 
   useEffect(() => {
@@ -66,10 +66,10 @@ const MessageDetails = ({
   }
   */
 
-  if (messageStore.activeMessage === undefined) {
+  if (activeMessage === undefined) {
     // DEBUG
     console.log('MessageDetails: loading component triggered by loading variable')
-    console.log(`MessageDetails: loading value is ${messageStore.activeMessage}`)
+    console.log(`MessageDetails: loading value is ${activeMessage}`)
     return <LoadingCompnent/>
   }
 
