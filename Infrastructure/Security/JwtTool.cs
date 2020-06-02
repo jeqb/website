@@ -14,7 +14,7 @@ namespace Infrastructure.Security
         private readonly SymmetricSecurityKey _key;
         public JwtTool(IConfiguration config)
         {
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TOTALLY NOT SECURE"));
         }
 
         public string CreateToken(AppUser user)
