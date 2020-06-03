@@ -61,7 +61,7 @@ namespace API
             
             services.AddScoped<IJwtTool, JwtTool>();
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TOTALLY NOT SECURE"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {
