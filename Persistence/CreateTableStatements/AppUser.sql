@@ -1,0 +1,12 @@
+CREATE TABLE AppUser (
+    Id INTEGER NOT NULL AUTO_INCREMENT,
+    UserName VARCHAR(255),
+    Email VARCHAR(255),
+    DisplayName VARCHAR(255),
+    Salt VARCHAR(255),
+    PasswordHash VARCHAR(255),
+    IsLockedOut INTEGER,
+    CreatedDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedDateTime DATETIME,
+    CONSTRAINT AppUserId_pk PRIMARY KEY (Id)
+)

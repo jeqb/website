@@ -1,0 +1,9 @@
+CREATE TABLE BlogPost (
+    Id INTEGER NOT NULL AUTO_INCREMENT,
+    Title VARCHAR(255),
+    Body VARCHAR(255),
+    ImageKey INTEGER,
+    CreatedDateTime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedDateTime DATETIME,
+    CONSTRAINT BlogPostId_pk PRIMARY KEY (Id)
+)
