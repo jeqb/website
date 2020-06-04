@@ -10,20 +10,6 @@ namespace Persistence
     {
         public static void SeedData(DataContext context, AppUserBuilder userBuilder)
         {
-            // DUMMY ADMIN USER. REMOVE IN PRODUCTION
-            if(!context.AppUser.Any())
-            {
-                var user = userBuilder.AddUserName("admin")
-                    .AddEmail("james@test.com")
-                    .AddDisplayName("Admin - James")
-                    .AddPassword("Pa$$w0rd")
-                    .ReturnUser();
-
-                context.AppUser.Add(user);
-                context.SaveChanges();
-            }
-            // DUMMY ADMIN USER. REMOVE IN PRODUCTION
-
             if(!context.BlogPost.Any())
             {
                 var posts = new List<BlogPost>

@@ -37,7 +37,7 @@ namespace API
         {
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                opt.UseMySql(Environment.GetEnvironmentVariable("CONN_STRING"));
             });
 
             services.AddCors( opt =>

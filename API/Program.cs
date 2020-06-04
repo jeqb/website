@@ -27,7 +27,6 @@ namespace API
                 {
                     var context = services.GetRequiredService<DataContext>();
                     var userBuilder = new AppUserBuilder();
-                    context.Database.Migrate();
                     Seed.SeedData(context, userBuilder);
                 }
                 catch(Exception ex)

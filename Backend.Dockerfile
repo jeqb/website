@@ -17,8 +17,9 @@ WORKDIR /app
 COPY --from=build /app ./
 
 # environment variables
-# REPLACE WHEN GOING INTO PIPELINE
-ENV JWT_KEY HLOGUBvAJjJMAWkBPjNkmPLmlftzencbhPMCuJwUDhiaZQQVGSWmczLxLvpW
-# REPLACE WHEN GOING INTO PIPELINE
+# gets replace in build pipeline
+ENV JWT_KEY KEY_PLACE_HOLDER
+ENV CONN_STRING CONN_PLACE_HOLDER
+# gets replace in build pipeline
 
 ENTRYPOINT ["./API"]
