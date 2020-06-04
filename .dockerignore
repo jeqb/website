@@ -1,9 +1,16 @@
-# directories
+# C# directories
 **/bin/
 **/obj/
 **/out/
 
-# files
+# C# files
 Dockerfile*
 **/*.md
 .env
+
+# js
+node_modules
+build
+.dockerignore
+Backend.Dockerfile
+Frontend.Dockerfile
