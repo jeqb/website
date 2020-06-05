@@ -25,7 +25,7 @@ jobs:
       run: python3 ./kubernetes/insert_imagePullSecrets.py --s ${{ secrets.PRIVATE_REGISTRY_SECRET_NAME }}
     
     - name: Build container image
-      run: docker build --tag website:latest .
+      run: docker build --tag website:latest -f Backend.Dockerfile .
 
     - name: GitHub Action for DigitalOcean - doctl
       uses: digitalocean/action-doctl@v2.0.0
@@ -51,7 +51,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
 
     - name: Delete current kubernetes deployment
-      run: kubectl delete -n default deployment hello-digitalocean-app
+      run: kubectl delete -n default deployment website-app
 
     - name: Deploy new to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/deployment.yml
