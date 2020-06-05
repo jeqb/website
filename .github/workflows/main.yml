@@ -25,7 +25,7 @@ jobs:
       run: python3 ./kubernetes/insert_imagePullSecrets.py --s ${{ secrets.PRIVATE_REGISTRY_SECRET_NAME }}
     
     - name: Build container image
-      run: docker build --tag website:latest -f Backend.Dockerfile .
+      run: docker build --tag website:latest -f Frontend.Dockerfile .
 
     - name: GitHub Action for DigitalOcean - doctl
       uses: digitalocean/action-doctl@v2.0.0
