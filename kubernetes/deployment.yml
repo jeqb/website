@@ -17,7 +17,7 @@ spec:
         image: registry.digitalocean.com/website-registry/website:latest
         imagePullPolicy: 'Always'
         ports:
-          - containerPort: 5000
+          - containerPort: 80
         env:
           - name: CONN_STRING
             valueFrom:
