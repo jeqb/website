@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-backend
+spec:
+  replicas: 3
+  selector:
+    matchlabels:
+      name: website
+  template:
+    metadata:
+      labels:
+        name: website
+    spec:
+      containers:
+      - name: backend-server
+        image: registry.digitalocean.com/website-registry/website:backend
+        imagePullPolicy: 'Always'
+        ports:
+          - containerPort: 80
+        env:
+          - name: CONN_STRING
+            valueFrom:
+              secretKeyRef:
+                name: website-prod
+                key: databaseconnection
+          - name: JWT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: website-prod
+                key: jwtkey
+      imagePullSecrets:
+        - name: %

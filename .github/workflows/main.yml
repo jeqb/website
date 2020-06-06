@@ -24,8 +24,11 @@ jobs:
     - name: Inject imagePullSecret into the YAML file
       run: python3 ./kubernetes/insert_imagePullSecrets.py --s ${{ secrets.PRIVATE_REGISTRY_SECRET_NAME }}
     
-    - name: Build container image
-      run: docker build --tag website:latest -f Frontend.Dockerfile .
+    - name: build Backend container image
+      run: docker build --tag website:backend -f Backend.Dockerfile .
+
+    - name: Build Frontend container image
+      run: docker build --tag website:frontend -f Frontend.Dockerfile .
 
     - name: GitHub Action for DigitalOcean - doctl
       uses: digitalocean/action-doctl@v2.0.0
@@ -40,18 +43,23 @@ jobs:
       
     # this was from their docs
     # https://www.digitalocean.com/docs/images/container-registry/quickstart/#push-to-your-registry
-    - name: Tag the image in registry
-      run: docker tag website:latest registry.digitalocean.com/website-registry/website:latest
+    - name: Tag backend image in registry
+      run: docker tag website:backend registry.digitalocean.com/website-registry/website:backend
+
+    - name: Tag frontend image in registry
+      run: docker tag website:frontend registry.digitalocean.com/website-registry/website:frontend
       
-    - name: Push image to registry
-      run: docker push registry.digitalocean.com/website-registry/website:latest
-      
+    - name: Push backend image to registry
+      run: docker push registry.digitalocean.com/website-registry/website:backend
 
-    - name: Save DigitalOcean kubeconfig
-      run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
+    - name: Push frontend image to registry
+      run: docker push registry.digitalocean.com/website-registry/website:frontend
 
-    - name: Delete current kubernetes deployment
-      run: kubectl delete -n default deployment website-app
+    # - name: Save DigitalOcean kubeconfig
+    #   run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
 
-    - name: Deploy new to DigitalOcean Kubernetes
-      run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/deployment.yml
+    # - name: Delete current kubernetes deployment
+    #   run: kubectl delete -n default deployment website-app
+
+    # - name: Deploy new to DigitalOcean Kubernetes
+    #   run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/deployment.yml

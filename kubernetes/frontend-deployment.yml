@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: frontend-server
+        image: registry.digitalocean.com/website-registry/website:frontend
+        imagePullPolicy: 'Always'
+        ports:
+          - containerPort: 80
+      imagePullSecrets:
+        - name: %
