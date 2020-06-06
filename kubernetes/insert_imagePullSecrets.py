@@ -11,12 +11,24 @@ cli_args = parser.parse_args().__dict__
 registry_secret = cli_args.get('s')
 
 # open the yaml file
-with open('./kubernetes/deployment.yml', 'r') as myfile:
+with open('./kubernetes/backend-deployment.yml', 'r') as myfile:
 	yaml_file = myfile.read()
 	myfile.close()
 
 # insert the variable
 yaml_file = yaml_file.replace('%', registry_secret)
-new_file = open('./kubernetes/deployment.yml', 'w')
+new_file = open('./kubernetes/backend-deployment.yml', 'w')
+new_file.write(yaml_file)
+new_file.close()
+
+
+# open the yaml file
+with open('./kubernetes/frontend-deployment.yml', 'r') as myfile:
+	yaml_file = myfile.read()
+	myfile.close()
+
+# insert the variable
+yaml_file = yaml_file.replace('%', registry_secret)
+new_file = open('./kubernetes/frontend-deployment.yml', 'w')
 new_file.write(yaml_file)
 new_file.close()
