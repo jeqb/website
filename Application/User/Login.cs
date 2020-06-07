@@ -47,6 +47,11 @@ namespace Application.User
                     throw new Exception("Can NOT Connect to database");
                 }
 
+                return new ReturnUser
+                {
+                    UserName = "THIS IS USELESS"
+                };
+
                 /*
                 // poor implementation to search by email addres, but it works for now
                 var userResult = await _context.AppUser.ToArrayAsync();
