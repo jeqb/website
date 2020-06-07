@@ -40,17 +40,18 @@ namespace Application.User
             {
                 if (_context.Database.CanConnect())
                 {
-                    throw new Exception("Can Connect to database");
+                    return new ReturnUser
+                    {
+                        UserName = "Can connect to database"
+                    };
                 }
                 else
                 {
-                    throw new Exception("Can NOT Connect to database");
+                    return new ReturnUser
+                    {
+                        UserName = "Can NOT connect to database"
+                    };
                 }
-
-                return new ReturnUser
-                {
-                    UserName = "THIS IS USELESS"
-                };
 
                 /*
                 // poor implementation to search by email addres, but it works for now
