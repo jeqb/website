@@ -46,9 +46,9 @@ namespace Application.User
             public async Task<ReturnUser> Handle(Query request, CancellationToken cancellationToken)
             {
                 // debugging
-                if (_context.Database.CanConnect() == false)
+                if (_context.Database.CanConnect() == true)
                 {
-                    throw new RestException(HttpStatusCode.Accepted, "Can Not connect to database");
+                    throw new RestException(HttpStatusCode.Accepted, "successfully connected to database");
                 }
                 // debugging
 
