@@ -16,10 +16,4 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic
 WORKDIR /app
 COPY --from=build /app ./
 
-# environment variables
-# gets replace in build pipeline
-ENV JWT_KEY KEY_PLACE_HOLDER
-ENV CONN_STRING CONN_PLACE_HOLDER
-# gets replace in build pipeline
-
 ENTRYPOINT ["./API"]
