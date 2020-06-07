@@ -35,25 +35,23 @@ namespace Application.User
                 _passwordTool = passwordTool;
             }
 
-            // public async Task<ReturnUser> Handle(Query request, CancellationToken cancellationToken)
-            public ReturnUser Handle(Query request, CancellationToken cancellationToken)
+            public ReturnUser Foo(string message)
             {
-                if (_context.Database.CanConnect())
+                return new ReturnUser
                 {
-                    return new ReturnUser
-                    {
-                        UserName = "Can connect to database"
-                    };
-                }
-                else
-                {
-                    return new ReturnUser
-                    {
-                        UserName = "Can NOT connect to database"
-                    };
-                }
+                    UserName = message
+                };
+            }
 
-                /*
+            public async Task<ReturnUser> Handle(Query request, CancellationToken cancellationToken)
+            {
+                // debugging
+                if (_context.Database.CanConnect() == false)
+                {
+                    throw new RestException(HttpStatusCode.Accepted, "Can Not connect to database");
+                }
+                // debugging
+
                 // poor implementation to search by email addres, but it works for now
                 var userResult = await _context.AppUser.ToArrayAsync();
 
@@ -81,7 +79,6 @@ namespace Application.User
                 }
 
                 throw new RestException(HttpStatusCode.Unauthorized);
-                */
             }
         }
     }
