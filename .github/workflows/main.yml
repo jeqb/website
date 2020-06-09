@@ -59,7 +59,7 @@ jobs:
       run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
 
     - name: Delete current kubernetes deployment
-      run: kubectl delete -n default deployment frontend-deployment
+      run: kubectl delete -n default deployment website-frontend
 
     - name: Deploy new to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/frontend-deployment.yml
