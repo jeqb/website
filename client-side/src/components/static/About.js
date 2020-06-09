@@ -16,7 +16,7 @@ const About = () => {
   return (
     <React.Fragment className={classes.container}>
       <h1>
-        This is the about page
+        Nothing to see here on the about page just yet.
       </h1>
     </React.Fragment>
   );

@@ -9,6 +9,7 @@ project.lock.json
 nupkg/
 .env
 secret.yml
+database-service.yml
 
 # Visual Studio Code
 .vscode
