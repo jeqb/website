@@ -62,4 +62,4 @@ jobs:
       run: kubectl delete -n default deployment website-frontend
 
     - name: Deploy new to DigitalOcean Kubernetes
-      run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/frontend-deployment.yml
+      run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/backend-deployment.yml
