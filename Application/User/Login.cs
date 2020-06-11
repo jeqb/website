@@ -45,13 +45,6 @@ namespace Application.User
 
             public async Task<ReturnUser> Handle(Query request, CancellationToken cancellationToken)
             {
-                // debugging
-                if (_context.Database.CanConnect() == true)
-                {
-                    throw new RestException(HttpStatusCode.Accepted, "successfully connected to database");
-                }
-                // debugging
-
                 // poor implementation to search by email addres, but it works for now
                 var userResult = await _context.AppUser.ToArrayAsync();
 
