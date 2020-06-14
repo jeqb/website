@@ -6,11 +6,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      name: website
+      name: website-frontend
   template:
     metadata:
       labels:
-        name: website
+        name: website-frontend
     spec:
       containers:
       - name: frontend-server
@@ -19,4 +19,4 @@ spec:
         ports:
           - containerPort: 80
       imagePullSecrets:
-        - name: %
+        - name: registry-website-registry

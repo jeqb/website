@@ -10,6 +10,7 @@ nupkg/
 .env
 secret.yml
 database-service.yml
+*/production_issuer.yml
 
 # Visual Studio Code
 .vscode

@@ -21,10 +21,10 @@ jobs:
     - name: Checkout master
       uses: actions/checkout@master
 
-    - name: Inject imagePullSecret into the YAML file
-      run: python3 ./kubernetes/insert_imagePullSecrets.py --s ${{ secrets.PRIVATE_REGISTRY_SECRET_NAME }}
+    # - name: Inject imagePullSecret into the YAML file
+    #   run: python3 ./kubernetes/insert_imagePullSecrets.py --s ${{ secrets.PRIVATE_REGISTRY_SECRET_NAME }}
     
-    - name: build Backend container image
+    - name: Build Backend container image
       run: docker build --tag website:backend -f Backend.Dockerfile .
 
     - name: Build Frontend container image
@@ -58,11 +58,14 @@ jobs:
     - name: Save DigitalOcean kubeconfig
       run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
 
-    # - name: Delete current kubernetes deployment
-    #   run: kubectl delete -n default deployment website-backend
+    - name: Delete current backend deployment
+      run: kubectl delete -n default deployment website-backend
 
-    - name: Deploy new to DigitalOcean Kubernetes
+    - name: Delete current frontend deployment
+      run: kubectl delete -n default deployment website-backend
+
+    - name: Deploy backend to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/backend-deployment.yml
 
-    - name: Deploy new to DigitalOcean Kubernetes
+    - name: Deploy frontend to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/frontend-deployment.yml
