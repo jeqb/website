@@ -58,11 +58,11 @@ jobs:
     - name: Save DigitalOcean kubeconfig
       run: doctl kubernetes cluster kubeconfig save ${{ secrets.CLUSTER_NAME }}
 
-    - name: Delete current backend deployment
-      run: kubectl delete -n default deployment website-backend
+    # - name: Delete current backend deployment
+    #   run: kubectl delete -n default deployment website-backend
 
-    - name: Delete current frontend deployment
-      run: kubectl delete -n default deployment website-backend
+    # - name: Delete current frontend deployment
+    #   run: kubectl delete -n default deployment website-backend
 
     - name: Deploy backend to DigitalOcean Kubernetes
       run: kubectl apply -f $GITHUB_WORKSPACE/kubernetes/backend-deployment.yml
