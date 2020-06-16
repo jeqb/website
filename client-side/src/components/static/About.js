@@ -15,9 +15,18 @@ const About = () => {
   
   return (
     <React.Fragment className={classes.container}>
-      <h1>
-        Nothing to see here on the about page just yet.
+      <h1 style={{textAlign: 'center'}}>
+        About
       </h1>
+      <p style={{textAlign: 'center'}}>
+        This site is a portfolio for various personal projects to come.
+      </p>
+      <p style={{textAlign: 'center'}}>
+        The site itself is an ongoing software engineering project built with Dotnet Core and React.
+      </p>
+      <p style={{textAlign: 'center'}}>
+        More to come in the future.
+      </p>
     </React.Fragment>
   );
 };

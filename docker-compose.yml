@@ -1,0 +1,12 @@
+version: '3'
+services:
+    backend:
+        image: website:backend
+        ports:
+            - "5000:80"
+        env_file:
+            - .env
+    frontend:
+        image: website:frontend
+        ports:
+            - "1337:80"
