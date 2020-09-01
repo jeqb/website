@@ -14,6 +14,7 @@ import NotFound from './components/static/NotFound';
 import BadRequest from './components/static/BadRequest';
 import Unauthorized from './components/static/Unauthorized';
 import InternalServerError from './components/static/InternalServerError';
+import BlogEditor from './components/blog/BlogEditor';
 
 // data
 import { observer } from 'mobx-react-lite';
@@ -25,6 +26,9 @@ const App = () => {
       <Header/>
       <Container>
         <Switch>
+          {/* DEVELOPMENT */}
+          <Route exact path='/' component={BlogEditor}/>
+          {/* DEVELOPMENT */}
           <Route exact path='/' component={Home}/>
           <Route path='/about' component={About}/>
           <Route path='/contact' component={ContactContainer}/>
